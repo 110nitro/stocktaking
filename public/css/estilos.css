@@ -1,0 +1,161 @@
+body{
+    background-color: #36393f;
+    color: aliceblue;
+}
+body::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #f1f2f3;
+    border-radius: 15px;
+    border: 2px solid #2f3037;
+}
+body::-webkit-scrollbar-track {
+    border-radius: 15px;  
+}
+
+
+.navegador{
+    background-color: #2f3037 !important;
+}
+
+.contenedor-usuarios{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+.columna-izquierda{
+    width: 50%;
+    display: flex;
+    background-color: rgb(255, 246, 240);
+    color: #2f3037;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    margin-right: 10px;
+    padding-right: 0;
+}
+.formulario-usuario{
+    width: 100%;
+}
+.columna-derecha{
+    width: 50%;
+    background-color: rgb(255, 246, 240);
+    color: #2f3037;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    margin-left: 10px;
+    padding-left: 0;
+}
+.modal-content{
+    border-radius: 15px;
+}
+.modal-header{
+    color: rgb(0, 0, 0);
+}
+.modal-body{
+    color: rgb(14, 14, 14);
+}
+
+/*Perfil Usuario*/
+
+.perfil-usuario{
+    background-color: antiquewhite;
+    color: #2f3037;
+    width: 90%;
+    margin: auto;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.columna-productos{
+    width: 80%;
+    background-color: rgb(255, 246, 240);
+    color: #2f3037;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    margin-left: 10px;
+    padding-left: 0;
+}
+.contenedor-productos{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.formulario-productos{
+    width: 100%;
+}
+
+
+@media only screen and (max-width: 1000px){
+    .contenedor-usuarios{
+        align-items: center;
+        flex-direction: column;
+    }
+    .columna-izquierda{
+        width: 80%;
+        padding-left: 0;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .columna-derecha{
+        width: 80%;
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .lista-usuarios{
+        max-height: 600px;
+        overflow: auto;
+        scrollbar-color: rgba(0, 0, 0, .5) rgba(0, 0, 0, 0);
+        scrollbar-width: thin;
+    }
+    .lista-usuarios::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+    .lista-usuarios::-webkit-scrollbar-thumb {
+        background-color: #797979;
+        border-radius: 15px;
+        border: 2px solid #f1f2f3;
+    }
+    .lista-usuarios::-webkit-scrollbar-track {
+        border-radius: 15px;  
+    }
+
+    .columna-productos{
+        width: 90%;
+        padding-left: 0;
+        margin-left: 0;
+    }
+    .lista-productos{
+        max-height: 600px;
+        overflow: auto;
+        scrollbar-color: rgba(0, 0, 0, .5) rgba(0, 0, 0, 0);
+        scrollbar-width: thin;
+    }
+    .lista-productos::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+    .lista-productos::-webkit-scrollbar-thumb {
+        background-color: #797979;
+        border-radius: 15px;
+        border: 2px solid #f1f2f3;
+    }
+    .lista-productos::-webkit-scrollbar-track {
+        border-radius: 15px;  
+    }
+}
