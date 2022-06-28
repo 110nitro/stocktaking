@@ -36,6 +36,11 @@ Route::post('/perfil-actualizar-contraseña', [UserController::class, "Actualiza
 
 Route::view('/productos', 'productos')->name('producto');
 Route::get('/productos', [ProductoController::class, "MostrarProductos"])->name('productos');
+Route::view('/home', 'home')->name('productos');
+Route::get('/home', [ProductoController::class, "MostrarProductos"])->name('buscar-productos');
+Route::view('/', 'productos')->name('productos'); 
+Route::get('/', [ProductoController::class, "MostrarProductos"])->name('buscar-productos');
+
 Route::post('/productos-crear', [ProductoController::class, 'Crear'])->name('productos-crear');
 Route::post('/productos-activar', [ProductoController::class, 'Activar'])->name('productos-activar');
 Route::post('/productos-desactivar', [ProductoController::class, 'Desactivar'])->name('productos-desactivar');

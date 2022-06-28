@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto;
+use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
@@ -12,6 +13,16 @@ class ProductoController extends Controller
         $resProducto = Producto::get();
 
         return view('productos', ["resProducto"=>$resProducto]);
+    }
+
+    public function BuscarProductos(Request $request)
+    {
+        $producto=trim($request->get('producto'));
+        $resProducto=DB::table('productos')->select('id','detalles','stock','precio')
+                        ->where('detalles','LIKE','%'.$producto.'%')
+                        //->orderBy('detalles','asc')
+                        ->paginate(10);
+        return view('home.index', compact('resProducto','producto'));
     }
 
     public function Editar(Request $data)

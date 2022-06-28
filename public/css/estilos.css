@@ -95,11 +95,37 @@ body::-webkit-scrollbar-track {
     justify-content: center;
     align-items: baseline;
 }
-
 .formulario-productos{
     width: 100%;
 }
+.col-adminprod{
+    width: 20%;
+    background-color: rgb(255, 246, 240);
+    color: #2f3037;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    margin-right: 10px;
+    padding-right: 0;
+}
+.contenedor-productos-admin{
+    width: 100%;
+    display: flex;
+    justify-content: center;  
+}
 
+.buscador-productos{
+    width: 500px;
+}
+.buscador-productos form{
+    width: 100% !important;
+
+}
+.buscador-control{
+    width: 100% !important;
+}
 
 @media only screen and (max-width: 1000px){
     .contenedor-usuarios{
@@ -157,5 +183,9 @@ body::-webkit-scrollbar-track {
     }
     .lista-productos::-webkit-scrollbar-track {
         border-radius: 15px;  
+    }
+
+    .buscador-productos{
+        width: 95%;
     }
 }

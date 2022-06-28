@@ -277,9 +277,9 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="nombre_cargo{{$usuario["id"]}}" class="col-md-4 col-form-label text-md-end">{{ __('Cargo') }}</label>
+                                    <label for="cargo{{$usuario["id"]}}" class="col-md-4 col-form-label text-md-end">{{ __('Cargo') }}</label>
                                     <div class="col-md-6">
-                                        <select id="nombre_cargo{{$usuario["id"]}}" aria-label="Default select example" class="form-control @error('nombre_cargo') is-invalid @enderror" name="nombre_cargo" required autofocus>
+                                        <select id="cargo{{$usuario["id"]}}" aria-label="Default select example" class="form-control @error('cargo') is-invalid @enderror" name="cargo" required autofocus>
                                             <option value={{$usuario['cargo']}} selected>{{$usuario['cargo']}}</option>
                                                 @if($usuario['cargo'] == "Usuario")
                                                     <option value="Administrador">Administrador</option>

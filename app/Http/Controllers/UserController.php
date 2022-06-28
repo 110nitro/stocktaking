@@ -69,7 +69,8 @@ class UserController
                 'apellido' => 'required | string | max:255',
                 'dni' => 'required | int | min:8',
                 'telefono' => 'required | int | min:9',
-                'direccion' => 'required | string | max:255',
+                'direccion' => 'required',
+                'cargo' => 'required | string | max:255',
                 'email' => 'required | string | max:255 | email',
                 'password' => 'required | string | min:8 | confirmed',
             ]
@@ -83,7 +84,7 @@ class UserController
         $user->direccion = $data['direccion'];
         $user->email = $data['email'];
         $user->password = Hash::make($data['password']);
-        $user->cargo = $data['nombre_cargo'];
+        $user->cargo = $data['cargo'];
         $user->estado = 'Activo';
         $user->Save();
 

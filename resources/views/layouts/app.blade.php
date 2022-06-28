@@ -39,11 +39,20 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    @guest
+                    <!--@guest-->
 
-                    @else
+                    <!--@else-->
 
-                    @endguest
+                    <!--@endguest-->
+                    <ul class="navbar-nav me-auto">
+
+                    </ul>
+
+                    <div class="buscador-productos mr-sm-2">
+                        <form class="form-inline my-2 my-lg-0" action="" method="get">
+                            <input class="form-control mr-sm-2 buscador-control" type="search" name="producto" value="{{$producto}}" placeholder="Buscar Producto" aria-label="Search">
+                        </form>
+                    </div>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -55,11 +64,11 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
+                            <!--@if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif
+                            @endif--->
                         @else
                             @if(Auth::user()->cargo == 'Administrador')
                                 <ul class="navbar-nav me-auto">

@@ -2,51 +2,53 @@
 
 @section('content')
 <div class="container">
-    <div class="contenedor-usuarios justify-content-center">
-        <div class="columna-derecha">
-            <div class="formulario-usuario">
-                <div class="lista-usuarios">
-                    <div class="card-header">{{ __('Usuarios creados') }}</div>
+    <div class="contenedor-productos-admin justify-content-center">
+        <div class="col-adminprod">
+          filtros  
+        </div>
+        <div class="columna-productos">
+            <div class="formulario-productos">
+                <div class="lista-productos">
                     <div class="card-body">
                         <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th scope="col" class="cell-align"><span class="icon-nav-table"><ion-icon name="git-merge-outline"></ion-icon></span></th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellido</th>
-                                <th scope="col" class="display-off">Cargo</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Precio</th>
                                 <th scope="col">Editar</th>
                                 <th scope="col">Estado</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($resUser as $usuario)
+                            @foreach($resProducto as $producto)
                                 <tr>
-                                    <th scope="row" class="cell-align">{{$usuario['id']}}</th>
-                                    <td class="cell-align">{{$usuario['nombre']}}</td>
-                                    <td class="cell-align">{{$usuario['apellido']}}</td>
-                                    <td class="cell-align display-off">{{$usuario['cargo']}}</td>
+                                    <th scope="row" class="cell-align">{{$producto['id']}}</th>
+                                    <td class="cell-align">{{$producto['detalles']}}</td>
+                                    <td class="cell-align">{{$producto['stock']}}</td>
+                                    <td class="cell-align display-off">S/.{{number_format($producto['precio'],2)}}</td>
                                     <td class="cell-align">
-                                        <button type="submit" class="btn btn-primary btn-edit" data-toggle="modal" data-target="#ModalPlanta{{$usuario['id']}}">
+                                        <button type="submit" class="btn btn-primary btn-edit" data-toggle="modal" data-target="#ModalPlanta{{$producto['id']}}">
                                             <span class="icon-nav"><ion-icon name="create-outline"></ion-icon></span>{{ __('Editar') }}
                                         </button>
                                     </td>
                                     <td class="cell-align">
-                                        @if($usuario["estado"] == 'Activo')
+                                        @if($producto["estado"] == 'Activo')
                                             <div class="form-check form-switch">
-                                                <form method='post' action='{{ route('usuarios-desactivar') }}' id="formActivate{{$usuario['id']}}">
+                                                <form method='post' action='{{ route('productos-desactivar') }}' id="formActivate{{$producto['id']}}">
                                                     @csrf
-                                                    <input type='hidden' name='id' value='{{$usuario['id']}}'>
-                                                    <input class="form-check-input" type="checkbox" value="{{$usuario['id']}}" id="{{$usuario['id']}}" onchange="document.getElementById('formActivate{{$usuario['id']}}').submit()" checked>
+                                                    <input type='hidden' name='id' value='{{$producto['id']}}'>
+                                                    <input class="form-check-input" type="checkbox" value="{{$producto['id']}}" id="{{$producto['id']}}" onchange="document.getElementById('formActivate{{$producto['id']}}').submit()" checked>
                                                     <label class="form-check-label" for="flexSwitchCheckChecked">Activo</label>
                                                 </form>
                                             </div>
                                         @else
                                             <div class="form-check form-switch">
-                                                <form method='post' action='{{ route('usuarios-activar') }}' id="formActivate{{$usuario['id']}}">
+                                                <form method='post' action='{{ route('productos-activar') }}' id="formActivate{{$producto['id']}}">
                                                     @csrf
-                                                    <input type='hidden' name='id' value='{{$usuario['id']}}'>
-                                                    <input class="form-check-input" type="checkbox" value="" id="{{$usuario['id']}}" onchange="document.getElementById('formActivate{{$usuario['id']}}').submit()">
+                                                    <input type='hidden' name='id' value='{{$producto['id']}}'>
+                                                    <input class="form-check-input" type="checkbox" value="" id="{{$producto['id']}}" onchange="document.getElementById('formActivate{{$producto['id']}}').submit()">
                                                     <label class="form-check-label" for="flexSwitchCheckChecked">Inactivo</label>
                                                 </form>
                                             </div>
@@ -61,8 +63,8 @@
             </div>
         </div>
         <!-- Modal -->
-        @foreach($resUser as $usuario)
-            <div class="modal fade" id="ModalPlanta{{$usuario['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        @foreach($resProducto as $producto)
+            <div class="modal fade" id="ModalPlanta{{$producto['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -72,17 +74,17 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="POST" action="{{ route('usuarios-editar') }}" enctype="multipart/form-data" id="FormPl{{$usuario["id"]}}">
+                            <form method="POST" action="{{ route('productos-editar') }}" enctype="multipart/form-data" id="FormPl{{$producto["id"]}}">
                                 @csrf
 
                                 <div class="row mb-3">
-                                    <label for="nombre{{$usuario["id"]}}" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
+                                    <label for="detalles{{$producto["id"]}}" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="nombre{{$usuario["id"]}}" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{$usuario["nombre"]}}" required autocomplete="nombre" autofocus>
-                                        <input type='hidden' name='id' value='{{$usuario["id"]}}'>
+                                        <input id="detalles{{$producto["id"]}}" type="text" class="form-control @error('detalles') is-invalid @enderror" name="detalles" value="{{$producto["detalles"]}}" required autocomplete="detalles" autofocus>
+                                        <input type='hidden' name='id' value='{{$producto["id"]}}'>
 
-                                        @error('nombre')
+                                        @error('detalles')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -90,12 +92,12 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="apellido{{$usuario["id"]}}" class="col-md-4 col-form-label text-md-end">{{ __('Apellido') }}</label>
+                                    <label for="stock{{$producto["id"]}}" class="col-md-4 col-form-label text-md-end">{{ __('Stock') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="apellido{{$usuario["id"]}}" type="text" class="form-control @error('apellido') is-invalid @enderror" name="apellido" value="{{$usuario["apellido"]}}" required autocomplete="apellido" autofocus>
+                                        <input id="stock{{$producto["id"]}}" type="number" class="form-control @error('stock') is-invalid @enderror" name="stock" value="{{$producto["stock"]}}" required autocomplete="stock" autofocus>
 
-                                        @error('apellido')
+                                        @error('stock')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -103,88 +105,29 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="dni{{$usuario["id"]}}" class="col-md-4 col-form-label text-md-end">{{ __('DNI') }}</label>
+                                    <label for="precio{{$producto["id"]}}" class="col-md-4 col-form-label text-md-end">{{ __('Precio') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="dni{{$usuario["id"]}}" type="number" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{$usuario["dni"]}}" required autocomplete="dni" autofocus>
+                                        <input id="precio{{$producto["id"]}}" step="any" type="number" class="form-control @error('precio') is-invalid @enderror" name="precio" value="{{$producto["precio"]}}" required autocomplete="precio" autofocus>
 
-                                        @error('dni')
+                                        @error('precio')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="row mb-3">
-                                    <label for="telefono{{$usuario["id"]}}" class="col-md-4 col-form-label text-md-end">{{ __('Telefono') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="telefono{{$usuario["id"]}}" type="number" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{$usuario["telefono"]}}" required autocomplete="telefono" autofocus>
-
-                                        @error('telefono')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="direccion{{$usuario["id"]}}" class="col-md-4 col-form-label text-md-end">{{ __('Direccion') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="direccion{{$usuario["id"]}}" type="text" class="form-control @error('direccion') is-invalid @enderror" name="direccion" value="{{$usuario["direccion"]}}" required autocomplete="direccion" autofocus>
-
-                                        @error('direccion')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="nombre_cargo{{$usuario["id"]}}" class="col-md-4 col-form-label text-md-end">{{ __('Cargo') }}</label>
-                                    <div class="col-md-6">
-                                        <select id="nombre_cargo{{$usuario["id"]}}" aria-label="Default select example" class="form-control @error('nombre_cargo') is-invalid @enderror" name="nombre_cargo" required autofocus>
-                                            <option value={{$usuario['cargo']}} selected>{{$usuario['cargo']}}</option>
-                                                @if($usuario['cargo'] == "Usuario")
-                                                    <option value="Administrador">Administrador</option>
-                                                @else
-                                                    <option value="Usuario">Usuario</option>
-                                                @endif
-                                        </select>
-
-                                        @error('cargo')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong class="alert-form">{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <label for="email{{$usuario["id"]}}" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="email{{$usuario["id"]}}" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$usuario['email']}}" required autocomplete="email">
-
-                                        @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" form="FormPl{{$usuario["id"]}}">Guardar</button>
+                            <button type="submit" class="btn btn-primary" form="FormPl{{$producto["id"]}}">Guardar</button>
                         </div>
                     </div>
                 </div>
             </div>
         @endforeach
+        
     </div>
 </div>
                         
