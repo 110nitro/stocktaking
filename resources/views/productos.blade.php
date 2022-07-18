@@ -4,7 +4,7 @@
 <div class="container">
     <div class="contenedor-productos-admin justify-content-center">
         <div class="col-adminprod">
-          ewe  
+            ewe  
         </div>
         <div class="columna-productos">
             <div class="formulario-productos">
